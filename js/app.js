@@ -21,22 +21,42 @@ document.getElementById('pin-generator').addEventListener('click',function(){
 
 document.getElementById('calculator').addEventListener('click', function(event){
   const number=event.target.innerText;
-  const pinDisplayField=document.getElementById('pin-display');
-  const previousValue = pinDisplayField.value;
+  const calculatePinField=document.getElementById('pin-display');
+  const previousCalculatePin = calculatePinField.value;
   
   if(isNaN(number)){
     if(number==='C'){
-      pinDisplayField.value="";
+      calculatePinField.value="";
     }
     else if (number === '<'){
-      const digits=previousValue.split('');
+      const digits=previousCalculatePin.split('');
       digits.pop();
       const remainingDigits=digits.join('');
-      pinDisplayField.value=remainingDigits;
+      calculatePinField.value=remainingDigits;
     }
   }
   else{    
-    const newPinNumber=previousValue+number;
-    pinDisplayField.value=newPinNumber;
+    const newPinNumber=previousCalculatePin+number;
+    calculatePinField.value=newPinNumber;
+  }
+})
+
+document.getElementById('verify-pin').addEventListener('click', function(){
+  const generatePinField=document.getElementById('pin-field');
+  const currentPin=generatePinField.value;
+
+  const calculatePinField=document.getElementById('pin-display');
+  const currentCalculatePin = calculatePinField.value;
+
+  const pinSuccessMessage=document.getElementById('pin-success');
+  const pinErrorMessage=document.getElementById('pin-incorrect');
+  
+  if(currentPin === currentCalculatePin){
+    pinSuccessMessage.style.display='block';
+    pinErrorMessage.style.display='none';
+  }
+  else{
+    pinErrorMessage.style.display='block';
+    pinSuccessMessage.style.display='none';
   }
 })
