@@ -20,7 +20,23 @@ document.getElementById('pin-generator').addEventListener('click',function(){
 })
 
 document.getElementById('calculator').addEventListener('click', function(event){
-  const value=event.target.innerText;
+  const number=event.target.innerText;
   const pinDisplayField=document.getElementById('pin-display');
-  pinDisplayField.value=value;
+  const previousValue = pinDisplayField.value;
+  
+  if(isNaN(number)){
+    if(number==='C'){
+      pinDisplayField.value="";
+    }
+    else if (number === '<'){
+      const digits=previousValue.split('');
+      digits.pop();
+      const remainingDigits=digits.join('');
+      pinDisplayField.value=remainingDigits;
+    }
+  }
+  else{    
+    const newPinNumber=previousValue+number;
+    pinDisplayField.value=newPinNumber;
+  }
 })
